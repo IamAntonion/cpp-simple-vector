@@ -19,7 +19,17 @@ public:
         }
     }
  
-    ArrayPtr(const ArrayPtr&) = delete;
+    explicit ArrayPtr(ArrayPtr&& other) {
+        swap(simple_vector_, other.simple_vector_);
+        other.simple_vector_ = nullptr;
+    }
+ 
+    ArrayPtr& operator=(ArrayPtr&& other) {
+        if (this != &other) {
+            std::swap(simple_vector_, other.simple_vector_);
+        }
+        return *this;
+    }
  
     ~ArrayPtr() {
         delete[] simple_vector_;

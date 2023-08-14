@@ -252,7 +252,7 @@ public:
     }
  
     Iterator Erase(ConstIterator pos) {
-        if (begin() <= pos && end() >= pos) {
+        if (begin() <= pos && end() > pos) {
             auto index = std::distance(cbegin(), pos);
             std::move(&simple_vector_[index + 1], end(), const_cast<Iterator>(pos));
             --size_;
